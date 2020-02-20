@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModelTIendaVirutal" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelTIendaVirutalContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Productos" EntityType="ModelTIendaVirutal.Productos" />
+    <EntitySet Name="Pedidos" EntityType="ModelTIendaVirutal.Pedidos" />
+    <AssociationSet Name="ProductosPedidos" Association="ModelTIendaVirutal.ProductosPedidos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <EntitySet Name="Clientes" EntityType="ModelTIendaVirutal.Clientes" />
+    <AssociationSet Name="ClientesPedidos" Association="ModelTIendaVirutal.ClientesPedidos">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <EntitySet Name="Stock" EntityType="ModelTIendaVirutal.Stock" />
+  </EntityContainer>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Precio" Type="Double" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Imagen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Pedidos" Relationship="ModelTIendaVirutal.ProductosPedidos" FromRole="Productos" ToRole="Pedidos" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Productos" Relationship="ModelTIendaVirutal.ProductosPedidos" FromRole="Pedidos" ToRole="Productos" />
+    <NavigationProperty Name="Clientes" Relationship="ModelTIendaVirutal.ClientesPedidos" FromRole="Pedidos" ToRole="Clientes" />
+  </EntityType>
+  <Association Name="ProductosPedidos">
+    <End Type="ModelTIendaVirutal.Productos" Role="Productos" Multiplicity="*" />
+    <End Type="ModelTIendaVirutal.Pedidos" Role="Pedidos" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Pedidos" Relationship="ModelTIendaVirutal.ClientesPedidos" FromRole="Clientes" ToRole="Pedidos" />
+  </EntityType>
+  <Association Name="ClientesPedidos">
+    <End Type="ModelTIendaVirutal.Clientes" Role="Clientes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ModelTIendaVirutal.Pedidos" Role="Pedidos" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+</Schema>
