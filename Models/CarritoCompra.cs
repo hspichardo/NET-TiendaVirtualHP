@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TiendaVirutalHarlynPichardoO.Models
 {
-    public class CarritoCompra: List<Productos>
+    public class CarritoCompra: List<Producto>
     {
         
     }

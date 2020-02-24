@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TiendaVirutalHarlynPichardoO.Models.Productos>
+﻿@model IEnumerable<TiendaVirutalHarlynPichardoO.Models.Producto>
 
 @{
     ViewBag.Title = "Index";
@@ -17,11 +17,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Precio)
         </th>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.Imagen)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
         <th></th>
     </tr>
 
@@ -36,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Imagen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
 
             <td>

@@ -12,7 +12,7 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
 {
     public class ProductosController : Controller
     {
-        private ModelTIendaVirutalContainer db = new ModelTIendaVirutalContainer();
+        private TiendaVirutalHarlynPichardoOEntities db = new TiendaVirutalHarlynPichardoOEntities();
 
         // GET: Productos
         public ActionResult Index()
@@ -27,12 +27,12 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productos productos = db.Productos.Find(id);
-            if (productos == null)
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
             {
                 return HttpNotFound();
             }
-            return View(productos);
+            return View(producto);
         }
 
         // GET: Productos/Create
@@ -46,17 +46,16 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,Cantidad,Imagen")] Productos productos)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,Cantidad,Imagen")] Producto producto)
         {
             if (ModelState.IsValid)
             {
-                
-                db.Productos.Add(productos);
+                db.Productos.Add(producto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(productos);
+            return View(producto);
         }
 
         // GET: Productos/Edit/5
@@ -66,12 +65,12 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productos productos = db.Productos.Find(id);
-            if (productos == null)
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
             {
                 return HttpNotFound();
             }
-            return View(productos);
+            return View(producto);
         }
 
         // POST: Productos/Edit/5
@@ -79,15 +78,15 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Precio,Cantidad,Imagen")] Productos productos)
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Precio,Cantidad,Imagen")] Producto producto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(productos).State = EntityState.Modified;
+                db.Entry(producto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(productos);
+            return View(producto);
         }
 
         // GET: Productos/Delete/5
@@ -97,12 +96,12 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productos productos = db.Productos.Find(id);
-            if (productos == null)
+            Producto producto = db.Productos.Find(id);
+            if (producto == null)
             {
                 return HttpNotFound();
             }
-            return View(productos);
+            return View(producto);
         }
 
         // POST: Productos/Delete/5
@@ -110,8 +109,8 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Productos productos = db.Productos.Find(id);
-            db.Productos.Remove(productos);
+            Producto producto = db.Productos.Find(id);
+            db.Productos.Remove(producto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

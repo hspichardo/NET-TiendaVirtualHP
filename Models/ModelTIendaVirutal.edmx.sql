@@ -8,7 +8,6 @@
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [TiendaVirutalHarlynPichardoO];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -90,7 +89,8 @@ GO
 -- Creating table 'ProductosPedidos'
 CREATE TABLE [dbo].[ProductosPedidos] (
     [Productos_Id] int  NOT NULL,
-    [Pedidos_Id] int  NOT NULL
+    [Pedidos_Id] int  NOT NULL,
+    [Cantidad] int NOT NULL
 );
 GO
 

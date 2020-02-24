@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TiendaVirutalHarlynPichardoO.Models.Productos>
+﻿@model IEnumerable<TiendaVirutalHarlynPichardoO.Models.Producto>
 
 @{
     ViewBag.Title = "Index";
@@ -43,7 +43,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
             @Html.ActionLink("Agregar Carrito de Compra", "Add", "Carrito", item, null)
         </td>
     </tr>
