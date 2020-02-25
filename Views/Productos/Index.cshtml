@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-outline-success" })
 </p>
 <table class="table">
     <tr>
@@ -38,13 +38,14 @@
             @Html.DisplayFor(modelItem => item.Cantidad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Imagen)
+            <!-- @Html.DisplayFor(modelItem => item.Imagen) -->
+            <img src="~/Content/img/@item.Imagen" width="50px" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Agregar Carrito de Compra", "Add", "Carrito", item, null)
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id },new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id },new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id },new { @class = "btn btn-danger" }) |
+            @Html.ActionLink("Agregar Carrito de Compra", "Add", "Carrito", item, new { @class = "btn btn-info" })
         </td>
     </tr>
 }

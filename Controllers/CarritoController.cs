@@ -12,7 +12,14 @@ namespace ProyectoM.Controllers
         // GET: Carrito
         public ActionResult Index(CarritoCompra cc)
         {
-            return View(cc);
+            TiendaVirutalHarlynPichardoOEntities db = new TiendaVirutalHarlynPichardoOEntities();
+            var res = (from cli in db.Clientes
+                       where cli.Email.Equals(User.Identity.Name)
+                       select cli);
+            if (res.Count() != 0)
+                return View(cc);
+            else
+                return RedirectToAction("Create", "Clientes");
         }
 
         public ActionResult Add(CarritoCompra cc, Producto product)
@@ -63,11 +70,7 @@ namespace ProyectoM.Controllers
                 db.ProductosPedidos.Add(pp);
 
             }
-            for (int i = 0; i<cc.Count(); i++)
-            {
-                cc.RemoveAt(i);
-               
-            }
+            cc.Clear();
             
             
 

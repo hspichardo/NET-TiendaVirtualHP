@@ -15,12 +15,20 @@ namespace TiendaVirutalHarlynPichardoO.Controllers
         private TiendaVirutalHarlynPichardoOEntities db = new TiendaVirutalHarlynPichardoOEntities();
 
         // GET: Productos
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Productos.ToList());
+            var res = (from cli in db.Clientes
+                       where cli.Email.Equals(User.Identity.Name)
+                       select cli);
+            if (res.Count() != 0)
+                return View(db.Productos.ToList());
+            else
+                return RedirectToAction("Create", "Clientes");
         }
 
         // GET: Productos/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
