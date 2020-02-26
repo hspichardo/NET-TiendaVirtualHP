@@ -61,7 +61,15 @@ namespace ProyectoM.Controllers
                 Producto pe = db.Productos.Find(pi.Id);
                 pe.Cantidad = pe.Cantidad - pi.Cantidad;
                 db.Entry(pe).State = System.Data.Entity.EntityState.Modified;
+                if(pe.Cantidad < 4)
+                {
+                    Stock stock = new Stock();
+                    stock.Nombre = pe.Nombre;
+                    db.Stocks.Add(stock);
+                }
                 db.SaveChanges();
+
+
 
                 ProductosPedido pp = new ProductosPedido();
                 pp.Pedido = ped;
@@ -77,6 +85,14 @@ namespace ProyectoM.Controllers
            
             db.SaveChanges();
             return View("Index", cc);
+        }
+
+        public ActionResult Delete(CarritoCompra cc, Producto producto)
+        {
+            cc.RemoveAll(p => p.Id == producto.Id);
+
+            return RedirectToAction("Index", cc);
+
         }
     }
 }
